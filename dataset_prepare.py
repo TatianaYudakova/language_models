@@ -35,6 +35,6 @@ if __name__ == '__main__':
         input_file = codecs.open(path, 'r', 'utf_8_sig')
         text_file = input_file.read()
         text = clear_text(text_file)
-        output_file = open('data/dataset.txt', 'a')
+        output_file = open('data\\dataset.txt', 'a')
         output_file.write(text)
         output_file.close()
