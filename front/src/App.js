@@ -16,13 +16,10 @@ function App() {
             body: {
                 "text": text
             }
-        })
-            .then(response => {
-                    console.log('RESPONSE');
-                    console.log(response);
-                }
-            )
-    })
+        }).then(response => {
+            return response.json();
+        }).then(data => setWordList(data))
+    });
 
     function clearText() {
         setText("");
