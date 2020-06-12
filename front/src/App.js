@@ -3,23 +3,24 @@ import './App.css';
 
 function App() {
     const [text, setText] =  useState("");
-    const [wordList, setWordList] = useState(['first', 'second', 'third']);
+    const [wordList, setWordList] = useState([]);
 
     function handleChange({target: {value}}) {
         setText(value);
+        setTimeout(sendText(value), 500);
     }
 
-    useEffect(() => {
+    function sendText(value) {
         fetch("http://localhost:8000/api/get_continue_by_input", {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
-            body: {
-                "text": text
-            }
+            body: JSON.stringify({
+                text: value
+            })
         }).then(response => {
             return response.json();
         }).then(data => setWordList(data))
-    });
+    }
 
     function clearText() {
         setText("");
@@ -38,7 +39,7 @@ function App() {
             <div className="App-body">
                 <input className="Input" value={text} type="text" onChange={handleChange}/>
             <button className="Button" onClick={clearText}>Очистить</button>
-                <ul className="List">
+            <ul className="List">
                 {
                     wordList.map(item => {
                         return(<li key={item} onClick={() => selectWord(item)}>
@@ -47,7 +48,7 @@ function App() {
                         </li>)
                     })
                 }
-                </ul>
+            </ul>
             </div>
         </div>
 );
