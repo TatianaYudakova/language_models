@@ -7,9 +7,22 @@ function App() {
 
     function handleChange({target: {value}}) {
         setText(value);
-        fetch("")
-            .then()
     }
+
+    useEffect(() => {
+        fetch("http://localhost:8000/api/get_continue_by_input", {
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+            body: {
+                "text": text
+            }
+        })
+            .then(response => {
+                    console.log('RESPONSE');
+                    console.log(response);
+                }
+            )
+    })
 
     function clearText() {
         setText("");
