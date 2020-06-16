@@ -1,6 +1,6 @@
 import numpy as np
 
-from configuration import *
+from neural_network.configuration import *
 
 np.random.seed(42)
 import tensorflow as tf
@@ -10,6 +10,7 @@ from keras.layers import LSTM
 from keras.layers.core import Dense, Activation
 from keras.optimizers import RMSprop
 import pickle
+
 
 chars = []
 char_indices = {}

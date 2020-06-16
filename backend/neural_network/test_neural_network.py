@@ -1,6 +1,6 @@
 import numpy as np
 
-from configuration import SEQUENCE_LENGTH
+from neural_network.configuration import SEQUENCE_LENGTH
 
 np.random.seed(42)
 import tensorflow as tf
@@ -94,7 +94,7 @@ if __name__ == '__main__':
     ]
 
     for q in quotes:
-        seq = q[:40].lower()
+        seq = q[:SEQUENCE_LENGTH].lower()
         print(seq)
         print(predict_completions(seq, 5))
         print()

@@ -19,6 +19,7 @@ def clear_text(text):
     text = regex.sub("!..", "", text)
     text = regex.sub("[-]+", "", text)
     text = regex.sub("^[ ]+\n$", "", text)
+    text = regex.sub("[.]", "", text)
     text = regex.sub("\r\n", " ", text)
     text = regex.sub("\n", " ", text)
     text_length = 0

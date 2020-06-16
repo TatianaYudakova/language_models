@@ -4,3 +4,4 @@ backend/*/__pycache__
 */.idea
 front/package-lock.json
 front/package-lock.json
+*/__pycache__
