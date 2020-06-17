@@ -7,7 +7,9 @@ function App() {
 
     function handleChange({target: {value}}) {
         setText(value);
-        setTimeout(sendText(value), 500);
+        if (value.length >= 40) {
+            setTimeout(sendText(value), 500);
+        }
     }
 
     function sendText(value) {
@@ -39,7 +41,7 @@ function App() {
             <div className="App-body">
                 <input className="Input" value={text} type="text" onChange={handleChange}/>
             <button className="Button" onClick={clearText}>Очистить</button>
-            <ul className="List">
+                <ul className="List">
                 {
                     wordList.map(item => {
                         return(<li key={item} onClick={() => selectWord(item)}>
@@ -48,7 +50,7 @@ function App() {
                         </li>)
                     })
                 }
-            </ul>
+                </ul>
             </div>
         </div>
 );
