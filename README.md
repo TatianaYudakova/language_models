@@ -1,25 +1,84 @@
 # language_models
+## Описание
+Данное приложение предсказывает следующую слово или следующую букву слова. 
+За предсказание отвечает рекурентная нейросеть.
 
-1. Run front-end part
-
-    `cd front`
-
-    `npm start`
-
-
-
-
-2. Run back-end part
-## Before launch
-- Install required libraries in file 'requirements.txt'
-## Startup Applicaton
-For launch application write in terminal follow command:
-Go to folder with manage.py
+## Старт проекта
+Этот проект написан на языке Python, c использованием Framework Django (rest-framework) - Серверная часть. 
+React - на клиентской части.
+1. Запуск клиентской части:
+Перед запуском клиентской части необходимо установить программную платформу Node.js
+Скачать и установить можно с [официального сайта продукта](https://nodejs.org/ru/)
+Для запуска клиентской части приложения необходимо выполнить следующие команды:
+```
+// переходим в папку с клиентским приложением
+cd front
+// запускаем клиентскую часть
+npm start
+```
+2. Запуск серверной части:
+Перед запуском необходимо установить библиотеки из файла 'requirements.txt'. 
+А также необходимо установить python последней версии. Скачать можно с [официального сайта](https://www.python.org/downloads/)
+Это можно сделать следующей командой в командной строке:
+```
+// OS Windows
+pip install -r requirements.txt
+// Mac OS or Linux
+pip3 install -r requirements.txt
+```
+Для запуска приложения перейдите в папку с файлом 'manage.py' выполните следующую команду в терминале:
 ```
 // OS Windows
 python manage.py runserver
 // Mac OS or Linux
 python3 manage.py runserver
 ```
+
 ## API
-- get_continue_by_input (POST) - return continue sentences by input string. In request body contains input string
+- get_continue_by_input (POST) - возвращает продолжение предложения по входной строке, которая передается в теле запроса.
+
+## Нейронная сеть
+Построение модели и обучение нейронной сети использовались библиотеки TensorFlow и Keras.
+В файле configuration.py указаны настройки нейронной сети такие параметры как:
+- Длина последовательности, на которые будет делится датасет
+- Скорость обучения
+- Функция активации
+- Количество эпох
+- Функция потерь
+- Количесво образцов, которые передаются в сеть
+- Доля тренировочных данных для валидации
+
+### Создание датасета
+В папку 'backend/neural_network/data/raw/' поместить данные для создания датасета на данный момент используются следующий список книг (в формате txt):
+
+запустить в терминале:
+```
+// OS Windows
+python neural_network/dataset_prepare.py
+// Mac OS or Linux
+python3 neural_network/dataset_prepare.py
+```
+На выходе в папке 'backend/neural_network/data/' создаться файл 'dataset.txt'
+'dataset.txt' - созданный датасет, очищенный от шумовых символов и приведенный к нижнему регистру, который будет использоваться для обучения нейросети
+
+### Обучение нейронной сети:
+Для обучения нейронной сети необходимо выставить необходимые настройки в файле 'configuration.py'
+Для запуска обучения нейронной сети в терминале выполнить следующую команду:
+```
+// OS Windows
+python neural_network/train.py
+// Mac OS or Linux
+python3 neural_network/train.py
+```
+После обучения будут сформированны файлы, где сохранены модель и история обуения:
+- keras_model.h5
+- history.p
+
+### Тестирование и построение графиков
+Для тестирования и построения графиков необходимо выполнить следующую команду:
+```
+// OS Windows
+python neural_network/test_neural_network.py
+// Mac OS or Linux
+python3 neural_network/test_neural_network.py 
+```
