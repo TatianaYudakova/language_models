@@ -8,3 +8,4 @@ numpy==1.18.5
 seaborn==0.10.1
 tensorflow==1.15.2
 setuptools==41.0.0
+regex
